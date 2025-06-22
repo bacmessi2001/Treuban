@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bạn Có Yêu Tôi Không?</title>
+    <title>Anh Có Yêu em Không?</title>
     <!-- Tailwind CSS for styling -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -31,7 +31,7 @@
 
     <div id="main-container" class="text-center p-8">
         <!-- The question -->
-        <h1 id="question" class="text-3xl md:text-5xl font-bold text-gray-800 mb-8">Bạn có yêu tôi không? 🤔</h1>
+        <h1 id="question" class="text-3xl md:text-5xl font-bold text-gray-800 mb-8">Anh Có Yêu em Không? 🤔</h1>
         
         <!-- The image/gif that changes based on interaction -->
         <img id="image" src="https://media1.tenor.com/m/al4a1pG1fIAAAAAC/sad-sad-cat.gif" alt="cute cat asking" class="mx-auto mb-8 rounded-lg shadow-lg w-64 h-64 object-cover">
@@ -40,21 +40,21 @@
         <div id="button-container" class="relative flex flex-col sm:flex-row items-center justify-center gap-4">
             <!-- The "Yes" button -->
             <button id="yesButton" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:scale-105">
-                Có ❤️
+                Không 😠
             </button>
             
             <!-- The "No" button, positioned absolutely to allow it to move -->
             <button id="noButton" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:scale-105 absolute sm:static">
-                Không 😠
+                Có ❤️
             </button>
         </div>
     </div>
 
     <!-- The success message that appears after clicking "Yes" -->
     <div id="successMessage" class="hidden fixed inset-0 bg-pink-100 bg-opacity-90 flex flex-col items-center justify-center text-center p-8">
-        <h2 class="custom-font text-4xl md:text-6xl text-pink-500 mb-4">Tôi biết mà!</h2>
+        <h2 class="custom-font text-4xl md:text-6xl text-pink-500 mb-4">Tệ!</h2>
         <img src="https://media1.tenor.com/m/A15-dYN52dIAAAAC/love.gif" alt="love gif" class="mx-auto rounded-lg shadow-lg w-72 h-72 object-cover mb-4">
-        <p class="text-2xl text-gray-700">Yêu bạn nhiều lắm 😘</p>
+        <p class="text-2xl text-gray-700">Thực ra anh vẫn yêu em nhiều lắm 😘</p>
     </div>
 
     <script>
@@ -67,11 +67,11 @@
         
         let noButtonMoveCount = 0;
         const messages = [
-            "Không á? Chắc chưa?",
-            "Nghĩ lại đi mà... 🥺",
-            "Pleaseeeee?",
+            "Có á? Chắc chưa?",
+            "Không yêu em chứ gì... 🥺",
+            "Dỗi?",
             "Đừng làm trái tim này tan vỡ...",
-            "Tôi sẽ buồn lắm đó!",
+            "Em sẽ buồn lắm đó!",
             "Một cơ hội cuối cùng!",
         ];
 
