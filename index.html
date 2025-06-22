@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bạn Có Yêu Tôi Không?</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for a friendlier feel */
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .custom-font {
+            font-family: 'Pacifico', cursive;
+        }
+        /* Ensure the body takes full height for vertical centering */
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden; /* Prevent scrollbars when the button moves */
+        }
+        /* Add a subtle transition to the button's movement */
+        #noButton {
+            transition: all 0.1s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-pink-100 flex items-center justify-center">
+
+    <div id="main-container" class="text-center p-8">
+        <!-- The question -->
+        <h1 id="question" class="text-3xl md:text-5xl font-bold text-gray-800 mb-8">Bạn có yêu tôi không? 🤔</h1>
+        
+        <!-- The image/gif that changes based on interaction -->
+        <img id="image" src="https://media1.tenor.com/m/al4a1pG1fIAAAAAC/sad-sad-cat.gif" alt="cute cat asking" class="mx-auto mb-8 rounded-lg shadow-lg w-64 h-64 object-cover">
+
+        <!-- Container for buttons to manage positioning -->
+        <div id="button-container" class="relative flex flex-col sm:flex-row items-center justify-center gap-4">
+            <!-- The "Yes" button -->
+            <button id="yesButton" class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:scale-105">
+                Có ❤️
+            </button>
+            
+            <!-- The "No" button, positioned absolutely to allow it to move -->
+            <button id="noButton" class="bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-transform transform hover:scale-105 absolute sm:static">
+                Không 😠
+            </button>
+        </div>
+    </div>
+
+    <!-- The success message that appears after clicking "Yes" -->
+    <div id="successMessage" class="hidden fixed inset-0 bg-pink-100 bg-opacity-90 flex flex-col items-center justify-center text-center p-8">
+        <h2 class="custom-font text-4xl md:text-6xl text-pink-500 mb-4">Tôi biết mà!</h2>
+        <img src="https://media1.tenor.com/m/A15-dYN52dIAAAAC/love.gif" alt="love gif" class="mx-auto rounded-lg shadow-lg w-72 h-72 object-cover mb-4">
+        <p class="text-2xl text-gray-700">Yêu bạn nhiều lắm 😘</p>
+    </div>
+
+    <script>
+        // Get references to the HTML elements
+        const yesButton = document.getElementById('yesButton');
+        const noButton = document.getElementById('noButton');
+        const mainContainer = document.getElementById('main-container');
+        const successMessage = document.getElementById('successMessage');
+        const image = document.getElementById('image');
+        
+        let noButtonMoveCount = 0;
+        const messages = [
+            "Không á? Chắc chưa?",
+            "Nghĩ lại đi mà... 🥺",
+            "Pleaseeeee?",
+            "Đừng làm trái tim này tan vỡ...",
+            "Tôi sẽ buồn lắm đó!",
+            "Một cơ hội cuối cùng!",
+        ];
+
+        // Event listener for the "No" button
+        // When the mouse hovers over it, move it to a random position
+        noButton.addEventListener('mouseover', moveButton);
+        noButton.addEventListener('click', moveButton); // Also move on click for touch devices
+
+        function moveButton() {
+            noButtonMoveCount++;
+            
+            // Change the image to a sadder one
+            image.src = 'https://media1.tenor.com/m/Hi9y-S-p1VoAAAAC/sad-cute.gif';
+            
+            // Change the text on the button, looping through the messages array indefinitely
+            noButton.textContent = messages[(noButtonMoveCount - 1) % messages.length];
+
+            const containerRect = document.body.getBoundingClientRect();
+            const buttonRect = noButton.getBoundingClientRect();
+
+            let newTop, newLeft;
+
+            // Ensure the new position is within the viewport
+            do {
+                newTop = Math.random() * (containerRect.height - buttonRect.height);
+                newLeft = Math.random() * (containerRect.width - buttonRect.width);
+            } while (isOverlapping(newLeft, newTop, buttonRect, yesButton.getBoundingClientRect()));
+            
+            noButton.style.position = 'fixed'; // Use fixed to position relative to viewport
+            noButton.style.top = `${newTop}px`;
+            noButton.style.left = `${newLeft}px`;
+        }
+        
+        // Helper function to check if the new position overlaps with the "Yes" button
+        function isOverlapping(x, y, rect1, rect2) {
+            // Check if two rectangles overlap
+            return !(x + rect1.width < rect2.left || 
+                     x > rect2.right || 
+                     y + rect1.height < rect2.top || 
+                     y > rect2.bottom);
+        }
+
+        // Event listener for the "Yes" button
+        // When clicked, hide the main container and show the success message
+        yesButton.addEventListener('click', () => {
+            mainContainer.classList.add('hidden');
+            successMessage.classList.remove('hidden');
+        });
+
+    </script>
+
+</body>
+</html>
